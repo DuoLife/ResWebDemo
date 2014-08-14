@@ -14,6 +14,17 @@ body {
     margin: 10px auto !important;
     border-radius: 10px;
 }
+.info_box_2 {
+    float: inherit;
+    min-height: 40px;
+    background: #f2dede ;
+    border-bottom: 3px solid #eed3d7;
+    text-align: center;
+    line-height: 35px;
+    color: #b94a48;
+    margin: 0 auto !important;
+    border-radius: 10px;
+}
 .box {
     height: 100px;
     min-height: 100px;
