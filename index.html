@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Created by chenshenhai -->
+    <meta charset="UTF-8">
+    <title>ReqWebDemo</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="msapplication-tap-highlight" content="no"/>
+
+    <!-- less预编译模块，测试阶段使用，发布时请把less编译成css，并删除该模块 -->
+    <link rel="stylesheet/less" type="text/css" href="css/res.comm.less">
+    <script>
+        less = {
+            env: "development",
+            async: false,
+            fileAsync: false,
+            poll: 1000,
+            functions: {},
+            dumpLineNumbers: "comments",
+            relativeUrls: false,
+            rootpath: ":/a.com/"
+        };
+    </script>
+    <script type="text/javascript" src="js/less-1.7.0.min.js"></script>
+    <!--less预编译模块 end!-->
+
+    <link rel="stylesheet" type="text/css" href="css/style.css"/>
+    <script type="text/javascript" src="js/modernizr-1.7.js"></script>
+    <!-- 判断浏览器是否为IE，加载不同js库 -->
+    <script type="text/javascript">
+        (function(){
+            var brower = window.navigator.userAgent;
+            var reg = new RegExp('MSIE');
+            isIE =  reg.test(brower);
+            //alert(isIE);
+            document.write('<script type="text/javascript" src="'+ (isIE ? 'js/jquery-2.1.1.js' : 'js/zepto.js') +'"><\/script>');
+        })();
+    </script>
+    <!--[if IE 6]-->
+        <script type="text/javascript" src=""></script>
+    <!--[end if]-->
+
+</head>
+<body>
+    <!--<script type="text/javascript">-->
+        <!--//显示屏幕宽度-->
+        <!--document.write( document.body.clientWidth);-->
+    <!--</script>-->
+    <div class="res_body">
+        <h1 style="margin: 20px 0;" class="test">响应式web框架</h1>
+        <h4 class="info_box">本框架可通过.create_cols(@col_num, @width_lg, @width_md, @width_sm, @width_xs, @margin_r, @pre_name)函数制定任意栅格数目的响应式前端框架！</h4>
+        <p class="info_box" style="text-align: left; padding: 20px;">
+            * &nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bolder">Made by ChenShenhai</span> <br/>
+            * &nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bolder">Email:&nbsp csh_demo@163.com</span> <br/>
+            * 栅格化函数 .create_cols(@col_num, @width_lg, @width_md, @width_sm, @width_xs, @margin_r, @pre_name)<br/>
+            * @col_num : 栅格化数目;<br/>
+            * @width_lg: 大屏显示的宽度，一般为：1200px;<br/>
+            * @width_md: 普通屏幕显示宽度，一般为：992px;<br/>
+            * @width_sm: pad显示宽度，一般为：768px;<br/>
+            * @width_xs: 手机显示宽度，默认为：auto;<br/>
+            * @margin_r: 栅格之间的边距，默认为：0;<br/>
+            * @pre_name : 栅格化名称前缀<br/></p>
+        <h2 class="test" align="center">EXAMPLE</h2>
+        <!-------header头部-------------------------------------------------------->
+        <h2 class="test">header-no-margin | class="nav_*"</h2>
+        <h4 class="info_box">.create_cols(@col_num:12, @width_lg:1200px, @width_md:992px, @width_sm:768px, @width_xs:auto, @margin_r:0px, @pre_name:nav);</h4>
+        <header class="row">
+            <div class="nav nav_lg_2 nav_md_2 nav_sm_2 nav_xs_4">3</div>
+            <div class="nav nav_lg_2 nav_md_2 nav_sm_2 nav_xs_4">3</div>
+            <div class="nav nav_lg_2 nav_md_2 nav_sm_2 nav_xs_4">3</div>
+            <div class="nav nav_lg_2 nav_md_2 nav_sm_2 nav_xs_4">3</div>
+            <div class="nav nav_lg_2 nav_md_2 nav_sm_2 nav_xs_4">3</div>
+            <div class="nav nav_lg_2 nav_md_2 nav_sm_2 nav_xs_4">3</div>
+        </header>
+        <h2 class="test">header-margin-10px | class="nav10_*"</h2>
+        <h4 class="info_box">.create_cols(@col_num:12, @width_lg:1200px, @width_md:992px, @width_sm:768px, @width_xs:auto, @margin_r:10px, @pre_name:nav10);</h4>
+        <header class="row">
+            <div class="nav nav10_lg_2 nav10_md_2 nav10_sm_2 nav10_xs_4">3</div>
+            <div class="nav nav10_lg_2 nav10_md_2 nav10_sm_2 nav10_xs_4">3</div>
+            <div class="nav nav10_lg_2 nav10_md_2 nav10_sm_2 nav10_xs_4">3</div>
+            <div class="nav nav10_lg_2 nav10_md_2 nav10_sm_2 nav10_xs_4">3</div>
+            <div class="nav nav10_lg_2 nav10_md_2 nav10_sm_2 nav10_xs_4">3</div>
+            <div class="nav nav10_lg_2 nav10_md_2 nav10_sm_2 nav10_xs_4">3</div>
+        </header>
+
+        <!-------section 中部-------------------------------------------------------->
+        <hr/>
+        <h2 class="test">section</h2>
+        <section>
+            <!-- 图片轮播 -->
+            <h3 class="test">slide image 图片轮播</h3>
+            <div class="slideImage" id="slideImage">
+                <a class="slide_click slide_pre" id="slide_left" href="javascript:void(0);" >pre</a>
+                <a class="slide_click slide_next" id="slide_right" href="javascript:void(0);" >next</a>
+                <a href="#" class="imgTitle" id="imgTitle"></a>
+                <div class="imageList" id="imageList">
+                    <a class="bg_linear_1" href="#"><img src="temp/001.jpg" title="001"></a>
+                    <a class="bg_linear_1" href="#"><img src="temp/002.jpg" title="002"></a>
+                    <a class="bg_linear_1" href="#"><img src="temp/003.jpg" title="003"></a>
+                    <a class="bg_linear_1" href="#"><img src="temp/004.jpg" title="004"></a>
+                </div>
+                <div class="selectImg"></div>
+
+                <ul class="selectList" id="selectList"></ul>
+            </div>
+            <!-- 图片轮播 end -->
+
+        </section>
+
+
+        <hr/>
+
+        <div class="row">
+            <div class="box col_md_12">12</div>
+        </div>
+        <div class="row">
+            <div class="box col_lg_6 col_md_6 col_sm_6 col_xs_6 col_xs_12 sm_margin_right">6</div>
+            <div class="box col_lg_6 col_md_6 col_sm_6 col_xs_6 col_xs_12">6</div>
+        </div>
+        <div class="row">
+            <class class="box col_md_12">
+                <div class="box col_lg_6 col_md_6 col_sm_6 col_xs_6 col_xs_6 sm_margin_right box_inner">6</div>
+                <div class="box col_lg_6 col_md_6 col_sm_6 col_xs_6 col_xs_6 box_inner">6</div>
+            </class>
+        </div>
+        <div class="row">
+            <div class="box col_lg_4 col_md_4 col_sm_4 col_xs_12">4</div>
+            <div class="box col_lg_4 col_md_4 col_sm_4 col_xs_12">4</div>
+            <div class="box col_lg_4 col_md_4 col_sm_4 col_xs_12">4</div>
+        </div>
+        <div class="row">
+            <div class="box col_lg_3 col_md_3 col_sm_3 col_xs_12">3</div>
+            <div class="box col_lg_3 col_md_3 col_sm_3 col_xs_12">3</div>
+            <div class="box col_lg_3 col_md_3 col_sm_3 col_xs_12">3</div>
+            <div class="box col_lg_3 col_md_3 col_sm_3 col_xs_12">3</div>
+        </div>
+        <div class="row">
+            <div class="box col_lg_2 col_md_2 col_sm_2 col_xs_12">2</div>
+            <div class="box col_lg_2 col_md_2 col_sm_2 col_xs_12">2</div>
+            <div class="box col_lg_2 col_md_2 col_sm_2 col_xs_12">2</div>
+            <div class="box col_lg_2 col_md_2 col_sm_2 col_xs_12">2</div>
+            <div class="box col_lg_2 col_md_2 col_sm_2 col_xs_12">2</div>
+            <div class="box col_lg_2 col_md_2 col_sm_2 col_xs_12">2</div>
+        </div>
+        <div class="row">
+            <div class="box col_lg_1 col_md_1 col_sm_1 col_xs_12">1</div>
+            <div class="box col_lg_1 col_md_1 col_sm_1 col_xs_12">1</div>
+            <div class="box col_lg_1 col_md_1 col_sm_1 col_xs_12">1</div>
+            <div class="box col_lg_1 col_md_1 col_sm_1 col_xs_12">1</div>
+            <div class="box col_lg_1 col_md_1 col_sm_1 col_xs_12">1</div>
+            <div class="box col_lg_1 col_md_1 col_sm_1 col_xs_12">1</div>
+            <div class="box col_lg_1 col_md_1 col_sm_1 col_xs_12">1</div>
+            <div class="box col_lg_1 col_md_1 col_sm_1 col_xs_12">1</div>
+            <div class="box col_lg_1 col_md_1 col_sm_1 col_xs_12">1</div>
+            <div class="box col_lg_1 col_md_1 col_sm_1 col_xs_12">1</div>
+            <div class="box col_lg_1 col_md_1 col_sm_1 col_xs_12">1</div>
+            <div class="box col_lg_1 col_md_1 col_sm_1 col_xs_12">1</div>
+        </div>
+    </div>
+    <div class="nav" style="cursor:pointer;  position:absolute;" id="scroll_top">TOP</div>
+
+
+
+    <!-- 图片轮播插件 -->
+    <script type="text/javascript" src="js/slide_image.js"></script>
+
+    <!-- common -->
+    <script type="text/javascript">
+        (function() {
+
+            /*-----------------图片轮播------------------*/
+            var temp = document.getElementById('imageList').getElementsByTagName('a').length;
+            //alert(temp);
+            slideImages.slideStart(temp, 'imageList', 'selectList', 'imgTitle');
+
+
+
+            /*-----------------回到顶部------------------*/
+            var top_btn = document.getElementById('scroll_top');
+            var screen_w = document.documentElement.clientWidth ||
+                    document.body.clientWidth;
+            var screen_h = document.documentElement.clientHeight ||
+                    document.body.clientHeight;
+            top_btn.style.left = screen_w - top_btn.offsetWidth - 30 + 'px';
+            top_btn.style.top = screen_h - top_btn.offsetHeight + 'px';
+            window.onscroll = function(){
+                var scroll_top = document.documentElement.scrollTop ||
+                        document.body.scrollTop;
+                top_btn.style.top = screen_h - top_btn.offsetHeight + scroll_top + 'px';
+            }
+            top_btn.onclick = function(){
+                //alert('ok;');
+                document.documentElement.scrollTop = document.body.scrollTop = 0;
+            }
+        })();
+    </script>
+
+
+<!------------------------- javascript插件 ------------------------->
+
+<!------------------------- javascript插件 ------------------------->
+
+</body>
+</html>

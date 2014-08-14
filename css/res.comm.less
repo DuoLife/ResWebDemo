@@ -1,0 +1,228 @@
+/*
+ * made by chenshenhai
+ */
+
+/*------------------------------------*/
+@import "res.init.less";  //样式初始化
+/*------------------------------------*/
+/*
+ * * Made by ChenShenhai* *
+ * 栅格化函数 .create_cols(@col_num, @width_lg, @width_md, @width_sm, @width_xs, @margin_r, @pre_name)
+ * @col_num : 栅格化数目;
+ * @width_lg: 大屏显示的宽度，一般为：1200px;
+ * @width_md: 普通屏幕显示宽度，一般为：992px;
+ * @width_sm: pad显示宽度，一般为：768px;
+ * @width_xs: 手机显示宽度，默认为：auto;
+ * @margin_r: 栅格之间的边距，默认为：0;
+ * @pre_name : 栅格化名称前缀
+ */
+//example
+.create_cols(@col_num:12, @width_lg:1200px, @width_md:992px, @width_sm:768px, @width_xs:auto, @margin_r:0px, @pre_name:nav);
+.create_cols(@col_num:12, @width_lg:1200px, @width_md:992px, @width_sm:768px, @width_xs:auto, @margin_r:10px, @pre_name:nav10);
+.create_cols(@col_num:12, @width_lg:1200px, @width_md:992px, @width_sm:768px, @width_xs:auto, @margin_r:20px, @pre_name:col);
+
+
+/*
+ * 栅格化函数 .create_cols(...)
+ */
+.create_cols(@col_num, @width_lg, @width_md, @width_sm, @width_xs, @margin_r, @pre_name) {
+
+  @col_lg_single_width: (@width_lg - @margin_r * (@col_num - 1)) / @col_num / @width_lg * 100%; //分辨率>=1200px (1200-20*11)/12/1200
+  @col_md_single_width: (@width_md - @margin_r * (@col_num - 1)) / @col_num / @width_md * 100%; //分辨率<1200px && >=992px
+  @col_sm_single_width: (@width_sm - @margin_r * (@col_num - 1)) / @col_num / @width_sm * 100%; //分辨率<992px && >=768px
+  @col_xs_single_width: 100% / @col_num;                                                        //分辨率<762px
+
+
+  /* margin */
+  @col_lg_margin: @margin_r / @width_lg * 100%; //  20/1200
+  @col_md_margin: @margin_r / @width_md * 100%; //  20/992
+  @col_sm_margin: @margin_r / @width_sm * 100%;
+
+
+  /* 通用样式 */
+  .box_size {
+    -webkit-box-sizing:border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+
+  .float_left {
+    float: left;
+  }
+
+  .float_right {
+    float: right;
+  }
+
+  .float_none {
+    float: none;
+  }
+
+  .no_margin_lr {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  .no_margin_right {
+    margin-right: 0 !important;
+  }
+
+  .no_margin_bottom {
+    margin-bottom: 0 !important;
+  }
+
+  /*-------------普通PC辨率样式992px-------------*/
+  .res_body {
+    width: @width_md;
+    height: auto;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .row {
+    width: 100%;
+    height: auto !important;
+  }
+
+  .row:after {
+    clear: both;
+  }
+
+  .row:before, .row:after {
+    display: table;
+    content: "";
+  }
+
+  .generate_col_md(@col_num - 1);
+  .generate_col_md(@n, @i : 1) when (@i =< @n) {
+    .@{pre_name}_md_@{i} {
+      width: @col_md_single_width * @i + @col_md_margin * (@i - 1);
+      margin-right: @col_md_margin;
+      .box_size;
+      _display: inline;
+      _float: left;
+      float: left;;
+    }
+    .generate_col_md(@n, (@i + 1));
+  }
+  .@{pre_name}_md_@{col_num} {
+    width: 100%;
+    float: left;
+  }
+
+
+  .no_margin_right {
+    margin-right: 0 !important;
+  }
+
+  .no_margin_bottom {
+    margin-bottom: 0 !important;
+  }
+
+
+
+  /*-------------高分辨率样式 >=1200px-------------*/
+  @media screen and (min-width: 1200px) {
+    .res_body {
+      width: @width_lg;
+    }
+
+    .generate_col_lg(@col_num - 1);
+    .generate_col_lg(@n, @i : 1) when (@i =< @n) {
+      .@{pre_name}_lg_@{i} {
+        width: @col_lg_single_width * @i + @col_lg_margin * (@i - 1);
+        margin-right: @col_lg_margin;
+        .box_size;
+        _display: inline;
+        _float: left;
+        float: left;
+      }
+      .generate_col_lg(@n, (@i + 1));
+    }
+    .@{pre_name}_lg_@{col_num} {
+      width: 100%;
+      float: left;
+    }
+
+
+
+    .lg_no_margin_right {
+      margin-right: 0 !important;
+    }
+    .lg_margin_right {
+      margin-right: @col_lg_margin !important;
+    }
+
+  }
+
+  /*-------------pad分辨率样式 768px-991px-------------*/
+  @media screen and (max-width:991px) and (min-width: 768px) {
+    .res_body {
+      width: @width_sm;
+    }
+
+    .generate_col_sm(@col_num - 1);
+    .generate_col_sm(@n, @i : 1) when (@i =< @n) {
+      .@{pre_name}_sm_@{i} {
+        width: @col_sm_single_width * @i + @col_sm_margin * (@i - 1);
+        margin-right: @col_sm_margin;
+        .box_size;
+        _display: inline;
+        _float: left;
+        float: left;
+      }
+      .generate_col_sm(@n, (@i + 1));
+    }
+    .@{pre_name}_sm_@{col_num} {
+      width: 100%;
+      float: left;
+    }
+
+
+    .sm_no_margin_right {
+      margin-right: 0 !important;
+    }
+    .sm_margin_right {
+      margin-right: @col_sm_margin !important;
+    }
+
+  }
+
+
+
+  /*-------------兼容手机分辨率样式 <768px-------------*/
+  @media screen and (max-width: 767px) {
+    .res_body {
+      width: @width_xs;
+    }
+
+    .generate_col_xs(@col_num - 1);
+    .generate_col_xs(@n, @i : 1) when (@i =< @n) {
+      .@{pre_name}_xs_@{i} {
+        width: @col_xs_single_width * @i;
+        .box_size;
+        _display: inline;
+        _float: left;
+        float: left;
+
+      }
+      .generate_col_xs(@n, (@i + 1));
+    }
+    .@{pre_name}_xs_@{col_num} {
+      width: 100%;
+      float: left;
+    }
+  }
+  //[class*=@{pre_name}] {
+  //  //float: left;
+  //  //margin-right: 0 !important;
+  //}
+
+  .row div:last-child {
+    margin-right: 0 !important;
+  }
+}
+
+
+
+
